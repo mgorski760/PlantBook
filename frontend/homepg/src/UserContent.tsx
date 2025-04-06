@@ -6,7 +6,7 @@ import "./Homepage.css";
 
 const plantImages = [plant2, plant7, plant8];
 
-const PostContent: React.FC = () => {
+const UserContent: React.FC = () => {
   const [posts, setPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -30,39 +30,49 @@ const PostContent: React.FC = () => {
 
     fetchPosts();
   }, []); // Empty dependency array to run only once on mount
-
-  if (loading) {
-    return <div>Loading posts...</div>;  // You can replace this with a spinner or another loading indicator
-  }
-
   return (
     <div>
-      {posts.length === 0 ? (
+      {loading ? (
+        <div>Loading posts...</div>
+      ) : posts.length === 0 ? (
         <div>No posts available.</div>
       ) : (
         <div>
-          <button className="button"> <h3>Create Post</h3></button> 
-          <ul className="post-list item-list">
-            {posts.map((post) => (
-              <li className="items" key={post.id}>
-                <button className="button">
-                  <div className="post-details">
-                    <ul>
-                      <li className="items">Username: {post.username}</li>
-                      <li className="items">Description: {post.description}</li>
-                      <li className="items">Comment</li>
-                      <li className="items">Like</li>
-                      <li className="items">Share</li>
-                    </ul>
-                  </div>
-                </button>
-              </li>
-            ))}
-          </ul>
+          <Modal />
         </div>
       )}
     </div>
   );
 };
 
-export default PostContent;
+const Modal: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  return (
+    <div>
+      <button className="postbutton" onClick={openModal}>Create Post</button>
+      {isOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close-btn" onClick={closeModal}>&times;</span>
+
+            <div className="info">
+              <div className="picture">Add Picture</div>
+              <div className="items">Add Description</div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default UserContent;
