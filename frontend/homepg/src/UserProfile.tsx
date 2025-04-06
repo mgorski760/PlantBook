@@ -1,7 +1,6 @@
 import React from "react";
 import Profilepic from './assets/Profilepic.png';
 import "./Homepage.css"; 
-import Logout from "./Logout";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const UserProfile: React.FC = () => {
@@ -25,7 +24,7 @@ const UserProfile: React.FC = () => {
                 <li className="profileitems">Change Profile</li>
                 <li className="profileitems">Email {user?.email}</li>
                 <li className="profileitems">Bio {user?.bio || "No bio available"}</li>
-                <li className="profileitems"><Logout /></li>
+                <li className="profileitems">Logout</li>
               </ul>
           </li>
       </ul>
