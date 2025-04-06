@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import plant1 from './assets/Plant1.png';
 import plant2 from './assets/Plant2.png';
 import plant3 from './assets/Plant3.png';
@@ -11,7 +11,29 @@ import "./Homepage.css";
 
 const plantImages = [plant1, plant2, plant3, plant4, plant4, plant5, plant6, plant7, plant8];
 
+interface User {
+    id: number;
+    name: string;
+    username: string;
+  }
+
+
 const HomeContent: React.FC = () => {
+    const [users, setUsers] = useState<User[]>([]); 
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/users"); // Backend URL
+        const data = await response.json();
+        setUsers(data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+    fetchUsers();
+  }, []);
+
   return (
     <div>
       <ul className="plant-list item-list">
@@ -30,6 +52,16 @@ const HomeContent: React.FC = () => {
           </li>
         ))}
       </ul>
+      <div>
+        <h2>Users List</h2>
+        <ul>
+          {users.map((user) => (
+            <li key={user.id}>
+              {user.name} ({user.username})
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { createRoot } from "react-dom/client";
 import logo from './assets/happy-plant-logo.png';
 import settings from './assets/settings-icon.png';
 import HomeContent from "./HomeContent";
@@ -7,15 +8,16 @@ import ChoosePlant from "./ChoosePlant";
 import Profile from "./UserProfile";
 import IdentifyPlant from "./IdentifyPlant";
 import Chatbot from "./Chatbot";
-import { useEffect } from 'react'
+import Login from "./Login";
 import "./Homepage.css";
+
 
 type ActivePage = "home" | "choosePlant" | "yourPosts" | "profile" | "identifyPlant" | "Chatbot";
 
 
 const Homepage: React.FC = () => {
   const [language, setLanguage] = useState<string>("English");
-  const [activePage, setActivePage] = useState<ActivePage>("home");
+  const [activePage, setActivePage] = useState<ActivePage>("home"); // Changed initial state to "home"
   console.log("Current Page:", activePage);
 
   const handleButtonClick = (page: ActivePage) => {
@@ -33,6 +35,7 @@ const Homepage: React.FC = () => {
   ];
 
   const renderContent = () => {
+    console.log("Rendering content for:", activePage);
     switch (activePage) {
       case "home":
         return <HomeContent />;
@@ -52,7 +55,7 @@ const Homepage: React.FC = () => {
   };
 
   return (
-    <div className = "background">
+    <div className="background">
       <header className="header">
         <div className="logo">
           <img src={logo} alt="Logo Image" width="80px" />
@@ -62,25 +65,23 @@ const Homepage: React.FC = () => {
           <li><button className="button"> Language<br />settings </button></li>
           <li className="settings">
             <button className="button">
-            <img src={settings} alt="Settings Icon" width="80px" />
+              <img src={settings} alt="Settings Icon" width="80px" />
             </button>
           </li>
+          <li><Login /></li>
         </ul>
       </header>
 
       <nav className="navbar">
         <ul>
-        {navItems.map((item) => (
+          {navItems.map((item) => (
             <li key={item.id} style={{ margin: '0 10px' }}>
               <button
-                onClick={() => handleButtonClick(item.id)}
-                style={{
-                  padding: '10px 15px',
-                  backgroundColor: activePage === item.id ? '#4CAF50' : '#f0f0f0',
-                  border: 'none',
-                  borderRadius: '4px',
-                  cursor: 'pointer'
+                onClick={() => {
+                  console.log("Clicked:", item.id);
+                  handleButtonClick(item.id);
                 }}
+                className={`nav-button ${activePage === item.id ? 'active' : ''}`}
               >
                 {item.label}
               </button>
@@ -88,20 +89,6 @@ const Homepage: React.FC = () => {
           ))}
         </ul>
       </nav>
-      <div style={{
-        position: 'fixed',
-        top: '10px',
-        right: '10px',
-        zIndex: 1000,
-        background: 'red',
-        color: 'white',
-        padding: '10px'
-      }}>
-        <button onClick={() => alert('Test button works!')}>
-          TEST BUTTON
-        </button>
-        <div>Current Page: {activePage}</div>
-      </div>
       <div className="content">
         {renderContent()}
       </div>
