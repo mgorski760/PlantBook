@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Plant Scanner
 
 A web application that allows users to identify plants through image recognition and learn about their care requirements.
@@ -113,3 +114,7 @@ MIT
 - Plant.id for the plant identification API
 - Plant icons and SVGs from [Heroicons](https://heroicons.com/)
 - Plant knowledge from various botanical resources
+=======
+# PlantBook
+# PlantBook
+>>>>>>> 7dd64bc0e4c6a7948544dad2c81428fe4930fdfc
