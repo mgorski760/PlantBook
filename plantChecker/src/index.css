@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global styles */
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: white;
+}
+
+/* Ensure all default text is white */
+@layer base {
+  html, body, div, span, h1, h2, h3, h4, h5, h6, p, ol, ul, li {
+    color: white;
+  }
+}
+
+/* Force white text for specific elements */
+.text-force-white {
+  color: white !important;
+}
