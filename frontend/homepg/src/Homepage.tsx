@@ -1,17 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from './assets/happy-plant-logo.png';
-import plant1 from './assets/Plant1.png';
-import plant2 from './assets/Plant2.png';
-import plant3 from './assets/Plant3.png';
-import plant4 from './assets/Plant4.png';
-import plant5 from './assets/Plant5.png';
-import plant6 from './assets/Plant6.png';
-import plant7 from './assets/Plant7.png';
-import plant8 from './assets/Plant8.png';
 import settings from './assets/settings-icon.png';
+import HomeContent from "./HomeContent";
+import YourPosts from "./UserContent";
+import ChoosePlant from "./ChoosePlant";
+import Profile from "./UserProfile";
+import IdentifyPlant from "./IdentifyPlant";
 import "./Homepage.css";
 
+type ActivePage = "home" | "choosePlant" | "yourPosts" | "profile" | "identifyPlant";
+
+
 const Homepage: React.FC = () => {
+  const [language, setLanguage] = useState<string>("English");
+  const [activePage, setActivePage] = useState<ActivePage>("yourPosts");
+  console.log("Current Page:", activePage);
+
+  const navItems: { id: ActivePage; label: string }[] = [
+    { id: "home", label: "Home" },
+    { id: "choosePlant", label: "Choose Plant" },
+    { id: "yourPosts", label: "Your Posts" },
+    { id: "profile", label: "Profile" },
+    { id: "identifyPlant", label: "Identify Plant" }
+  ];
+
+  const renderContent = () => {
+    switch (activePage) {
+      case "home":
+        return <HomeContent />;
+      case "yourPosts":
+        return <YourPosts />;
+      case "choosePlant":
+        return <ChoosePlant />;
+      case "profile":
+        return <Profile />;
+      case "identifyPlant":
+        return <IdentifyPlant />;
+      default:
+        return <HomeContent />;
+    }
+  };
+
   return (
     <div className = "background">
       <header className="header">
@@ -29,139 +58,24 @@ const Homepage: React.FC = () => {
         </ul>
       </header>
 
-      <div className="navbar">
+      <nav className="navbar">
         <ul>
-          <li><a href="#home">Home</a></li> {/* Non-Functional link */}
-          <li><a href="#choose_plant">Choose Plant</a></li> {/* Functional Link */}
-          <li><a href="#posts">Your Posts</a></li> {/* Functional Link */}
+          {navItems.map((item) => (
+              <li key={item.id}>
+                <button
+                  onClick={() => setActivePage(item.id)}
+                  className={activePage === item.id ? "active" : ""}>
+                  {item.label}
+                </button>
+              </li>
+            ))}
         </ul>
-      </div>
+      </nav>
 
-      <div>
-      <div>
-      <ul className="plant-list">
-        <li className="items">
-          <button className="button">
-            <img src={plant1} alt="Plant 1" />
-            <ul>
-              <li className="items">Succulent</li>
-              <li className="items">Post by: Imaginary Wonderwoman</li>
-              <li className="items">Comment</li>
-              <li className="items">Like</li>
-              <li className="items">Share</li>
-            </ul>
-          </button>
-        </li>
-
-        <li className="items">
-          <button className="button">
-            <img src={plant2} alt="Plant 2" />
-            <ul>
-            <li className="items">Succulent</li>
-              <li className="items">Post by: Imaginary Wonderwoman</li>
-              <li className="items">Comment</li>
-              <li className="items">Like</li>
-              <li className="items">Share</li>
-            </ul>
-          </button>
-        </li>
-
-        <li className="items">
-          <button className="button">
-            <img src={plant3} alt="Plant 3" />
-            <ul>
-            <li className="items">Succulent</li>
-              <li className="items">Post by: Imaginary Wonderwoman</li>
-              <li className="items">Comment</li>
-              <li className="items">Like</li>
-              <li className="items">Share</li>
-            </ul>
-          </button>
-        </li>
-
-        <li className="items">
-          <button className="button">
-            <img src={plant4} alt="Plant 4" />
-            <ul>
-            <li className="items">Succulent</li>
-              <li className="items">Post by: Imaginary Wonderwoman</li>
-              <li className="items">Comment</li>
-              <li className="items">Like</li>
-              <li className="items">Share</li>
-            </ul>
-          </button>
-        </li>
-
-        <li className="items">
-          <button className="button">
-            <img src={plant4} alt="Plant 4" />
-            <ul>
-            <li className="items">Succulent</li>
-              <li className="items">Post by: Imaginary Wonderwoman</li>
-              <li className="items">Comment</li>
-              <li className="items">Like</li>
-              <li className="items">Share</li>
-            </ul>
-          </button>
-        </li>
-
-        <li className="items">
-          <button className="button">
-            <img src={plant5} alt="Plant 5" />
-            <ul>
-            <li className="items">Succulent</li>
-              <li className="items">Post by: Imaginary Wonderwoman</li>
-              <li className="items">Comment</li>
-              <li className="items">Like</li>
-              <li className="items">Share</li>
-            </ul>
-          </button>
-        </li>
-
-        <li className="items">
-          <button className="button">
-            <img src={plant6} alt="Plant 6" />
-            <ul>
-            <li className="items">Succulent</li>
-              <li className="items">Post by: Imaginary Wonderwoman</li>
-              <li className="items">Comment</li>
-              <li className="items">Like</li>
-              <li className="items">Share</li>
-            </ul>
-          </button>
-        </li>
-
-        <li className="items">
-          <button className="button">
-            <img src={plant7} alt="Plant 7" />
-            <ul>
-            <li className="items">Succulent</li>
-              <li className="items">Post by: Imaginary Wonderwoman</li>
-              <li className="items">Comment</li>
-              <li className="items">Like</li>
-              <li className="items">Share</li>
-            </ul>
-          </button>
-        </li>
-
-        <li className="items">
-          <button className="button">
-            <img src={plant8} alt="Plant 8" />
-            <ul>
-            <li className="items">Succulent</li>
-              <li className="items">Post by: Imaginary Wonderwoman</li>
-              <li className="items">Comment</li>
-              <li className="items">Like</li>
-              <li className="items">Share</li>
-            </ul>
-          </button>
-        </li>
-
-      </ul>
-    </div>
+      <div className="content">
+        {renderContent()}
       </div>
     </div>
-    
   );
 };
 
