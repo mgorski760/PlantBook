@@ -6,22 +6,30 @@ import YourPosts from "./UserContent";
 import ChoosePlant from "./ChoosePlant";
 import Profile from "./UserProfile";
 import IdentifyPlant from "./IdentifyPlant";
+import Chatbot from "./Chatbot";
+import { useEffect } from 'react'
 import "./Homepage.css";
 
-type ActivePage = "home" | "choosePlant" | "yourPosts" | "profile" | "identifyPlant";
+type ActivePage = "home" | "choosePlant" | "yourPosts" | "profile" | "identifyPlant" | "Chatbot";
 
 
 const Homepage: React.FC = () => {
   const [language, setLanguage] = useState<string>("English");
-  const [activePage, setActivePage] = useState<ActivePage>("yourPosts");
+  const [activePage, setActivePage] = useState<ActivePage>("home");
   console.log("Current Page:", activePage);
+
+  const handleButtonClick = (page: ActivePage) => {
+    console.log('Button clicked, setting page to:', page);
+    setActivePage(page);
+  };
 
   const navItems: { id: ActivePage; label: string }[] = [
     { id: "home", label: "Home" },
     { id: "choosePlant", label: "Choose Plant" },
     { id: "yourPosts", label: "Your Posts" },
     { id: "profile", label: "Profile" },
-    { id: "identifyPlant", label: "Identify Plant" }
+    { id: "identifyPlant", label: "Identify Plant" },
+    { id: "Chatbot", label: "Chatbot" }
   ];
 
   const renderContent = () => {
@@ -36,6 +44,8 @@ const Homepage: React.FC = () => {
         return <Profile />;
       case "identifyPlant":
         return <IdentifyPlant />;
+      case "Chatbot":
+        return <Chatbot />;
       default:
         return <HomeContent />;
     }
@@ -60,18 +70,38 @@ const Homepage: React.FC = () => {
 
       <nav className="navbar">
         <ul>
-          {navItems.map((item) => (
-              <li key={item.id}>
-                <button
-                  onClick={() => setActivePage(item.id)}
-                  className={activePage === item.id ? "active" : ""}>
-                  {item.label}
-                </button>
-              </li>
-            ))}
+        {navItems.map((item) => (
+            <li key={item.id} style={{ margin: '0 10px' }}>
+              <button
+                onClick={() => handleButtonClick(item.id)}
+                style={{
+                  padding: '10px 15px',
+                  backgroundColor: activePage === item.id ? '#4CAF50' : '#f0f0f0',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer'
+                }}
+              >
+                {item.label}
+              </button>
+            </li>
+          ))}
         </ul>
       </nav>
-
+      <div style={{
+        position: 'fixed',
+        top: '10px',
+        right: '10px',
+        zIndex: 1000,
+        background: 'red',
+        color: 'white',
+        padding: '10px'
+      }}>
+        <button onClick={() => alert('Test button works!')}>
+          TEST BUTTON
+        </button>
+        <div>Current Page: {activePage}</div>
+      </div>
       <div className="content">
         {renderContent()}
       </div>

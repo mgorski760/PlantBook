@@ -8,13 +8,13 @@ const UserProfile: React.FC = () => {
     <div className="profile">
     <h3>Hello Imaginary WonderWoman</h3><br/>
       <ul className="profilelist">
-          <li className="items">
+          <li className="profileitems">
             <img src={Profilepic} alt="Profile"/>
               <ul>
-                <li className="items">Change Profile</li>
-                <li className="items">Email | Phone number</li>
-                <li className="items">Bio</li>
-                <li className="items">Logout</li>
+                <li className="profileitems">Change Profile</li>
+                <li className="profileitems">Email | Phone number</li>
+                <li className="profileitems">Bio</li>
+                <li className="profileitems">Logout</li>
               </ul>
           </li>
       </ul>
