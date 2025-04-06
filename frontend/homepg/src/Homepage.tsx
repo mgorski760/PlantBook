@@ -88,20 +88,6 @@ const Homepage: React.FC = () => {
           ))}
         </ul>
       </nav>
-      <div style={{
-        position: 'fixed',
-        top: '10px',
-        right: '10px',
-        zIndex: 1000,
-        background: 'red',
-        color: 'white',
-        padding: '10px'
-      }}>
-        <button onClick={() => alert('Test button works!')}>
-          TEST BUTTON
-        </button>
-        <div>Current Page: {activePage}</div>
-      </div>
       <div className="content">
         {renderContent()}
       </div>
