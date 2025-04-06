@@ -1,24 +1,33 @@
-.background {
-    height: 100%;
-    width: 100%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("Images/handprints.jpg");
-    align-items: center;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+.background{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('./assets/background.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed; 
+    margin: 0; 
+    padding: 0; 
+    height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
     z-index: -1;
-  }
+    position: relative;
+}
 
   .title{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 10px;
+    padding: 15px;
+    z-index: 100;
   }
 
   .header{
     display: flex;
     justify-content:space-between;
     padding: 10px;
+    align-items: center;
     background-color: antiquewhite;
-    height: 40%;
+    height: 10%;
+    z-index: 10;
+    position: relative;
   }
 
   .headerlist{
@@ -54,7 +63,7 @@
   color: rgb(1, 1, 159);
   align-items: center;
   margin: 3px;
-  height: 30px;
+  height: 20px;
   padding: 10px;
 }
 
@@ -81,10 +90,10 @@
   }
 
   .logo{
-    height: 20px;
-    width: 20px;
-    margin: 10px;
-    padding: 10px;
+    height: 40px;
+    width: auto;
+    margin: 5px;
+    padding: 5px;
     align-items: flex-start;
   }
 
@@ -112,10 +121,11 @@
     background-color: rgb(224, 205, 189);
   }
 
-  .item-list{
+  .plant-list{
     list-style: none;
     display: flex;
     flex-wrap: wrap;
+    flex-flow: row center;
     justify-content: left;
     align-items: center;
     gap: 10px;
