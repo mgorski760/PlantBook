@@ -6,7 +6,7 @@ from models import user
 @app.route("/api/users", methods=["GET"])
 def get_friends():
     usr = user.query.all()
-    result = [user.to_json()for usr in usr]
+    result = [usr.to_json() for usr in usr]
     return jsonify(result)
 
 #Create a new user
