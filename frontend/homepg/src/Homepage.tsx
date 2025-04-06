@@ -9,6 +9,7 @@ import Profile from "./UserProfile";
 import IdentifyPlant from "./IdentifyPlant";
 import Chatbot from "./Chatbot";
 import Login from "./Login";
+import { useAuth0 } from "@auth0/auth0-react";
 import "./Homepage.css";
 
 
@@ -18,11 +19,17 @@ type ActivePage = "home" | "choosePlant" | "yourPosts" | "profile" | "identifyPl
 const Homepage: React.FC = () => {
   const [language, setLanguage] = useState<string>("English");
   const [activePage, setActivePage] = useState<ActivePage>("home"); // Changed initial state to "home"
+  const { user, isAuthenticated, isLoading, logout } = useAuth0();
+  
   console.log("Current Page:", activePage);
 
   const handleButtonClick = (page: ActivePage) => {
     console.log('Button clicked, setting page to:', page);
     setActivePage(page);
+  };
+
+  const handleLogout = () => {
+    logout({ logoutParams: { returnTo: window.location.origin } });
   };
 
   const navItems: { id: ActivePage; label: string }[] = [
@@ -60,16 +67,29 @@ const Homepage: React.FC = () => {
         <div className="logo">
           <img src={logo} alt="Logo Image" width="80px" />
         </div>
-        <h2 className="title">WELCOME TO THE PLANTFACE EXTRAVAGANZA!</h2>
-        <ul className="headerlist">
-          <li><button className="button"> Language<br />settings </button></li>
-          <li className="settings">
-            <button className="button">
-              <img src={settings} alt="Settings Icon" width="80px" />
-            </button>
-          </li>
-          <li><Login /></li>
-        </ul>
+        <h2 className="title">WELCOME TO PlantBook</h2>
+        <div className="header-right">
+          {isAuthenticated ? (
+            <div className="header-user-info">
+              <div className="header-user-greeting">
+                <span>Hello, </span>
+                <span className="header-username" onClick={() => handleButtonClick("profile")}>
+                  {user?.name}
+                </span>
+              </div>
+              <div className="header-avatar" onClick={() => handleButtonClick("profile")}>
+                <img src={user?.picture} alt="Profile" />
+              </div>
+              <button className="header-logout-btn" onClick={handleLogout}>
+                Log Out
+              </button>
+            </div>
+          ) : (
+            <div className="header-auth">
+              <Login />
+            </div>
+          )}
+        </div>
       </header>
 
       <nav className="navbar">
