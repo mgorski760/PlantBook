@@ -1,4 +1,4 @@
-#!/Users/marcingorski/Desktop/Plantbook/.venv/bin/python3.13
+#!/home/bhumika/Documents/projects/prject_plantbook/PlantBook/backend/.venv/bin/python3.13
 # -*- coding: utf-8 -*-
 import re
 import sys
