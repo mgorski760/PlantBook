@@ -28,10 +28,10 @@ def create_post():
         
         username = data["username"]
         description = data["description"]
-        img_url = data.get("image_url")  
+        
 
         # Create and add new post to the database
-        new_post = post(username=username, description=description, image_url=img_url)
+        new_post = post(username=username, description=description)
         db.session.add(new_post)
         db.session.commit()
 
